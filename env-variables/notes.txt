@@ -1,0 +1,11 @@
+This how you can add an env variable:
+in the deployment.yaml:
+          env:
+            - name: STORY_FOLDER
+              value: 'story'
+
+
+and in the app.js:
+process.env.STORY_FOLDER
+
+However better solution to this would be rather then use a config map so that mupltiple containers can use it form one place.

@@ -1,0 +1,18 @@
+# persistent volume claims request storage resources from your cluster. 
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: host-pvc
+spec:
+  # to link with the host-pv.yaml:
+  # metadata:
+  # name: host-pv
+  volumeName: host-pv
+  accessModes:
+    - ReadWriteOnce
+  # kubectl get sc
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi

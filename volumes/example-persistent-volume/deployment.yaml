@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: story-deployment
+# configuration of pods
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: story
+  template:
+    metadata:
+      labels:
+        app: story
+    spec:
+      containers:
+        - name: story
+          image: aftabdear/kub-data-demo
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          persistentVolumeClaim:
+            # from host-pvc.yaml
+            # metadata:
+            # name: host-pvc
+            claimName: host-pvc
+
+
+
+# TO START:
+# kubectl apply -f=deployment.yaml
+# kubectl apply -f=host-pv.yaml
+# kubectl apply -f=host-pvc.yaml
+
+# Note:
+#  Deployment -> pvc -> pv

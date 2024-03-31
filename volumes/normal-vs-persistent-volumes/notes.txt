@@ -1,0 +1,21 @@
+"Normal"
+
+"normal" allow you to persist data not only just persistent
+normal is attached to pod, so if pod is deleted so is volume
+defined and created with pod
+
+hard to use on global level so not often used for production -
+because you have to go into individual pods to setup manually
+persistent volumes...
+
+
+
+"Persistent Volumes"
+
+Not attached to a Pod
+
+Can create the persistent volume using host-pv.yaml and then shared amongst different
+pods using persistent volume claim (host-pvc.yaml). Can be defined once and used
+multiple times.
+
+

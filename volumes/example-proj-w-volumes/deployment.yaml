@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: story-deployment
+# configuration of pods
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: story
+  template:
+    metadata:
+      labels:
+        app: story
+    spec:
+      containers:
+        - name: story
+          image: aftabdear/kub-data-demo
+          # From volumes
+          #     volumes:
+          #       - stories:/app/story
+          volumeMounts:
+            # const filePath = path.join(__dirname, 'story', 'text.txt');
+            # WORKDIR /app
+            # /app/story
+            # so this is where th empty dir path will be mounted
+            - mountPath: /app/story
+              # this specifys to grab the volume from -> volumes: - name: story-volune
+              name: story-volume
+      volumes:
+      # can find  different volume types here:
+      
+        - name: story-volume
+          # container removed or restarted dir is still there 
+          # but directory is removed on pod removal 
+          # emptyDir: {}
+          # INSTEAD if you want to persist data after pod removal
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate
+
+
+
+# TO START:
+# kubectl apply -f=service.yaml -f=deployment.yaml

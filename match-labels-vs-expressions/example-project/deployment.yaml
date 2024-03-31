@@ -1,0 +1,33 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: second-app-deployment
+  # by doing this 
+  labels:
+    group: example
+spec:
+  replicas: 1
+  selector:
+    # matchLabels:
+    #   app: second-app
+    #   tier: backend
+    matchExpressions:
+      # this means if the app is something from the list of values then 
+      # can now delete this like:
+      - {key: app, operator: In, values: [second-app, first-app]}
+  # similar to defining where the image is dockerhub/aftabdear
+  template:
+    metadata: 
+      labels:
+        app: second-app
+        tier: backend
+    # spec: -> spec: specifications of the individual pods
+    spec: 
+      containers:
+        - name: second-node
+          # same as --image=aftabdear/second-app
+          image: academind/kub-first-app:2
+
+# TO RUN:
+# kubectl apply -f=deployment.yaml
+#  -f specify file

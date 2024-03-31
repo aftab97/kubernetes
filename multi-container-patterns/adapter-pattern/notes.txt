@@ -1,0 +1,5 @@
+Adapter present a standardised interface across multiple pods
+Commonly used for normalising output loggs and monitoring data
+Allows you to use 3rd party software without changing code
+
+

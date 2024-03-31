@@ -1,0 +1,42 @@
+Most cases you dont want multiple container per pod.
+However if tightly coupled or they interact heavily with each other then you want them in seperate pods.
+
+CluterIP: an IP which connects containers in one Pod
+
+All pods needs services
+    - gives stable IP addresses even when internally used in one pod
+
+
+Pods can connect with each other in 3 ways: 
+    - manually searching IP 
+     >> users-deployment.yaml
+        env:
+        - name: AUTH_ADDRESS
+        value: "10.99.104.252"
+
+    - using automatically generated env variables
+        e.g. users-service.yaml
+
+            name: users-service
+        
+        This will be turned into: (capitals and dash changed to underscore and + _SERVICE_HOST)
+        process.env.USERS_SERVICE_SERVICE_HOST
+
+        NOTE:
+        In docker / docker-compose, the env is not automatically created so you have to setup yourself
+        e.g. docker-compose.yaml
+
+        services:
+         users:
+          build: ./users-api
+          environment:
+           AUTH_SERVICE_SERVICE_HOST: auth
+    
+    - CoreDNS
+        This comes with kubernetes and creates automatically gen domain names inside your cluster
+        e.g. name: auth-service --> "<service name>.<default>"
+        
+         >> users-deployment.yaml
+        env:
+        - name: AUTH_ADDRESS
+        value: "auth-service.default"

@@ -1,0 +1,116 @@
+Why K8? (ECS provides all of this)
+ - Manual deployment of containers ishard to maintain and error-prone
+ - Contianer replacement
+ - replicate instances upon traffic
+ - distrubution of traffic equally to containers
+
+Why Kubernetes?
+ - So we are not locked into ECS we can use other services (Azure)
+ - Wont have to learn the configs of cloud services to be able to use
+
+Disadvantages:
+Manual updates, security groups and firewalls
+
+Kubernetes Conepts
+
+---------------------
+|    Worker Node     |   
+|----------------    |  
+|                |   |          
+|Proxy / Config  |   |
+|                |   |
+|-----------------   |<--------| 
+|----------------    |         |
+|                |   |         |
+|Pod (Container) |   |         |
+|                |   |         |
+|-----------------   |         |
+---------------------          |      
+                               |---->Master Node (the control plane)
+---------------------          |
+|    Worker Node     |         |
+|----------------    |         |
+|                |   |         |       
+|Proxy / Config  |   |         |
+|                |   |         |
+|-----------------   |<--------| 
+|----------------    |
+|                |   |
+|Pod (Container) |   |
+|                |   |
+|-----------------   |
+---------------------    
+
+
+
+What you need to ? / what k8 can do?
+You:
+    - create cluster and node instances (worker & master ndoes)
+    - setup API server, kubelet and other K8 services / software on nodes
+    - create other resources like Load balancer, Filesystems
+
+K8:
+    - create your objects (Pods) and manage them
+    - monitor pods / re-create them / scale
+    - k8 utilizes the provided resources to apply your config / goals
+
+    Worker Node
+---------------------        
+|    POD             |       
+|----------------    |       
+|                |   |              
+|   Volumes      |   |       
+|                |   |       
+|-----------------   |
+|----------------    |
+|                |   |
+|   Container    |   |
+|                |   |
+|-----------------   |
+--------------------- 
+
+
+
+    Master Node
+---------------------        
+|                    |       
+|----------------    |       
+|                |   |              
+|Cloud-controller-manager: knows how to interact with cloud services          
+|                |   |       
+|-----------------   |
+|----------------    |       
+|                |   |              
+|   API Server   |   |  : API for kubeletes to communicate     
+|                |   |       
+|-----------------   |
+|----------------    |       
+|                |   |              
+|   Scheduler    |   |  : watches for new pods, selects worker nodes     
+|                |   |        
+|-----------------   |
+|----------------    |
+|                |   |
+|Kube-Controller-Manager: watches and controls worker nodes, correct no pods etc
+|                |   |
+|-----------------   |
+--------------------- 
+
+Cluster: set of node machines which are running the containerised apps 
+Nodes: Physical or vm with a certain harware capacity which hosts one or more pods
+Master nodes: cluster control plane - manages the pods across the worker nodes
+Pods: app container and resources (volumes) (runs docker run cmd internally)
+Services: A logical set of Pods with unique, Pod and container (independant IP)
+
+K8 works with objects:
+    Objects can be Pods, Deployments, Services, Volumes etc...
+two types:
+    - Impreatively
+        -  kubectl`
+    - Declaratively
+
+Pods: one more more apps (usuall one)
+      or can be volumes for containers
+      has a cluster-internal IP
+When pod is destroyed will lose files
+

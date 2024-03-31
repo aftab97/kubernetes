@@ -1,0 +1,3 @@
+kubectl -h | more   //this will give help with different commands
+
+kubectl explain pod.spec.containers.resources //just join the fields with dots and you can get more info

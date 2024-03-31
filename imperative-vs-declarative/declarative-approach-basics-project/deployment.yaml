@@ -1,0 +1,37 @@
+# Note: deployment object is how to control the pods
+# can find what latest version is from docs
+apiVersion: apps/v1 
+#  Service or Job or Deployment (specify kind)
+# Same as: kubectl create "deployment" first-app
+kind: Deployment
+metadata:
+  name: second-app-deployment
+# specification of this object
+spec:
+  # default is 1
+  replicas: 1
+  # tells that it needs to be controlled by this deployment
+  selector:
+    matchLabels:
+      app: second-app
+      tier: backend
+  # similar to defining where the image is dockerhub/aftabdear
+  template:
+    metadata: 
+      labels:
+        # could have named this app / deployment / depl / tier
+        app: second-app
+        tier: backend
+    # spec: -> spec: specifications of the individual pods
+    spec: 
+      containers:
+        # dashes define teh different pods e.g. - name: third-node
+        - name: second-node
+          # same as --image=aftabdear/second-app
+          image: academind/kub-first-app:2
+        # - name: ...
+        #   image: ...
+
+# TO RUN:
+# kubectl apply -f=deployment.yaml
+#  -f specify file

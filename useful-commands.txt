@@ -1,0 +1,28 @@
+kubectl create //create resources (Pods, Sercives, etc...) 
+kubectl delete // delete resources
+kubectl get {pods} //get list of resources (pods, srevices)
+kubectl describe {pod} | more  //get pod with a lot more info
+kubectl describe {pod server}// to print detailed info about a resource
+kubectl logs //prints container logs
+
+watch -n 1 kubectl get -n deplomyent deployment
+
+-----help and mooe info----------
+kubectl -h | more   //this will give help with different commands
+kubectl exaplin pod | more //lists info related to pods
+kubectl explain pod.spec.containers.resources //just join the fields with dots and you can get more info
+
+
+--------- Creating Manifests ------------
+alias kc-dry='kubectl create --dry-run=client -o yaml'
+
+
+strategy 1:
+kubectl run nginx --image=nginx --dry-run=client -o yaml > dry-run/3-nginx.yaml
+
+or
+
+strategy 2:
+kubectl create deployment my-deployment --image=nginx -o yaml --dry-run=client > dry-run/3-mydeployment.yaml
+    or shorter version:
+kc-dry deployment my-deployment --image=nginx > dry-run/3-mydeployment.yaml

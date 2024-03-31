@@ -1,0 +1,13 @@
+K8s Context-
+group of access params to a k8s cluster
+contains a kubernetes cluster, a user, and a namespace
+the current contect is the cluster that is currently the default for kubectl
+ - all kubectl commands run against the cluster
+
+Namespace
+ - kubectl get namespace
+ - kubectl config set-context --current --namespace=kube-system //change to kube-system (ns)
+ - kubectl get pods //get pods from the namespace
+ - kubectl create new-ns / kubectl get ns / kubectl delete new-ns //if you delete ns you will lose pods/containers
+
+ 

@@ -1,0 +1,18 @@
+Kubernetes volumes are more powerful then docker volumes:
+ 1. supports many different drivers and types
+    - can decide which hard drive to store on or use a aws service provider to store 
+ 2. Volumes are not persistent by default. Docker volume data is persisted.
+ 
+
+You can specify volumes to connect to nfs (network file storage system), csi etc...
+
+CSI:
+Allows you to work with different cloud providers file storage systems (EBS, EFS, )
+
+Hostpath:
+allows for persistent volumes but when working with AWS etc it does not help anymore because
+now you have multiple nodes and pods. Therefore the we require persistent volumes. PV claim
+
+
+ask for service now login - used for timeline and incident reports
+glassbox digital.io - video recording of user journey

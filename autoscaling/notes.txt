@@ -1,0 +1,30 @@
+Kind: HorizontalPodAutoScaler
+
+can set the spec min and max to what you require:
+spec:
+  maxReplicas: 5
+  minReplicas: 1
+
+
+CPU Average Percentage: 
+
+    targetCPUUtilizationPercentage: 70
+
+This will make sure the replicas will increase / decrease so that average CPU
+percentage across is 70% (min 63% and max 77%)
+
+
+How to target what you are scaling:
+
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: app-tier
+
+Debugging:
+kubectl describe -n deplyment hpa //hpa short hand for horizontal pod autoscaler
+OR
+watch -n 1 kubectl get -n deployment deployment
+
+serverside debugging:
+kubectl edit -n deployment hpa

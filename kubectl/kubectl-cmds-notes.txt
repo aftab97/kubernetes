@@ -1,0 +1,42 @@
+kubectl CMD sends instructions to control plane of a cluster
+
+kubectl get deployments //gets all deployments
+
+kubectl get pod //gets all pods
+kubectl get pods -Lapp -Ltier -Lrole //better with more description
+
+kubectl create deployment first-app --image=kub-first-app 
+    - This will not work because it send cmd to cluster which is in its own VM which is not the local where the image lives
+    -  INSTEAD use docker hub to specify image (aftabdear/kub-first-app)
+
+minkube dashboard 
+
+Services group pods with a shared IP & can allows external access to Pods
+    - kubectl expose deployment first-app --type=LoadBalancer --port=8080
+        - --type=LoadBalancer: distributes traffic evenly amongst the pods (EKS / minkube)
+        - kubectl get services //can see IP and other info
+        - minikube service first-app //gives me IP fo access the POD
+
+Scaling:
+    kubectl scale deployment/first-app --replicas=3
+    --replicas //define how many instances
+
+Updating:
+This will update with new image from registry (MAKE SURE UPDATED IMAGE HAS A NEW TAG)
+    - get image name from kubernetes dashboard
+    - kubectl set image deployment/first-app kub-first-app=aftabdear/kub-first-app:version-2
+
+Rollback:
+    - kubectl rollout status deployment/first-app //tells me status of app
+    - kubectl rollout undo deployment/first-app
+    - kubectl rollout history deployment/first-app //tells me all the revisions
+    - ERROR occurs with new deployment I want to rollback to old deployment
+    - kubectl rollout undo deplyment/first-app
+For a specific rollback:
+    - rollout undo deployment/first-app --to-revision=1
+
+FOR .yaml FILES:
+start:
+ kubectl apply -f=deployment.yaml
+stop
+ kubectl delete -f=deployment.yaml

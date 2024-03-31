@@ -1,0 +1,7 @@
+Uses a helper container to asist a primary container
+Commonly used for logging, file syncing, watchers
+
+Adv:
+leaner main container, failure isolation, independent update cycles
+
+

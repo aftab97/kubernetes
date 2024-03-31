@@ -1,0 +1,60 @@
+Cluster: 
+refers to all the machines
+
+Nodes: 
+are the machines in the cluster (can either be workers or masters)
+
+Worker Nodes:
+    kubectl get nodes
+They will be the nodes with the roles set to <none>
+
+Pods: extra abstraction layer ontop of one or more containers, one IP per pod
+    - container name
+    - container ports
+    - container restart policy
+    - resource limits
+    - probes
+
+Deployments best practices:
+have multiple nodes which are good for horizontal scaling (more machines)
+
+Control Plane:
+Contains the kube-api-server / controller manager / scheduler /etcd
+Runs on the master node
+- schedules conatiners onto nodes
+
+Kubernetes Servicing:
+Allow external IP for communication and static IP config for accessibility
+
+Kubernetes Deployment:
+Manage deploying configuration changes to runnning pods / horizontal scaling
+
+3 ways to communicate with API server:
+- REST API, possible but not common to work directly with API-Server
+- Client Libraries - Nodejs etc - handles authenticating and managing individual REST API requestsand responses
+- kubectl - manage debugging, inspecting etc..
+
+Communication between control plane and nodes:
+the default namescape is configured with a virtual IP that is redirected via kube-proxy to the endpoint.
+The cotrol plane components also commi
+
+API Server (or master component):
+acts as frontend for cluster
+
+API server to kubelet:
+- fetching logs of pods
+- attaching to running pods (usually through kubectl)
+- providing the kubelets port forwarding functionality
+
+Cluster IP vs Node Port vs Load Balancer
+- cluster Ip exposes traffic to internal network
+- node port allows external access to pods
+
+Sidecar:
+extend or enhance funcitnality of primary containers
+- collect logs generated in the primary containers, and forward them on
+- security and authentication
+- caching and content delivery
+    - integrate with CDNs or reverse proxy functionality to cache and serve static assets which reduces load on primary containers
+- data sync and replication, can handle data sync tasks, keeping the data in primary containers with dbs or services
+- file watching and hot reloading

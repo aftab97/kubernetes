@@ -1,0 +1,24 @@
+# Reminder service object alows a external access to other pods
+# same as:
+# kubectl expose deployment first-app --port=80 --type=LoadBalancer 
+apiVersion: v1
+
+kind: Service
+metadata:
+  name: backend
+spec:
+  # This will now specify to grab the pods second-app from deployments.yaml
+  selector: 
+    app: second-app
+  ports:
+    # can do multiple ports by specifying "- protocol:"
+    - protocol: 'TCP'
+      port: 80
+      targetPort: 8080
+    # - protocol: 'TCP'
+    #   port: 443
+    #   targetPort: 443
+  type: LoadBalancer
+
+# TO RUN:
+# kubectl apply -f=service.yaml 

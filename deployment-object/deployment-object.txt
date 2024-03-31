@@ -1,0 +1,7 @@
+Deployment Object:
+A set of instructions on how to control pods and get desired end state
+
+Controls (multiple) pods
+    Set desired state, k8 then changes the actual state (define which pods and container to run and the instances)
+    Deployments can be paused, deleted and rolled back
+    Deployments can be scalled dynamically (and automcatically)

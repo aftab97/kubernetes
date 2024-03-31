@@ -1,0 +1,5 @@
+if getting .pem unprotected then:
+    chmod 0400 20112391283921903.pem
+
+To ssh:
+ssh -i 201152448000.pem ubuntu@54.71.199.49 -oStrictHostKeyChecking=no

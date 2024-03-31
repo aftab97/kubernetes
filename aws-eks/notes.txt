@@ -1,0 +1,35 @@
+~/.kube/config.yaml
+
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQW
+    server: https://kubernetes.docker.internal:6443
+  name: docker-desktop
+- cluster:
+    certificate-authority: /Users/aftab/.minikube/ca.crt
+    extensions:
+    - extension:
+        last-update: Wed, 11 Oct 2023 14:03:01 BST
+        provider: minikube.sigs.k8s.io
+        version: v1.31.1
+      name: cluster_info
+    server: https://127.0.0.1:63088
+  name: minikube
+
+
+This currently contains config for minikube. 
+
+Steps to configure AWS EKS:
+
+1. create a Role which has the perminssion, AWS EKS - cluster node
+
+2.  Set cluster name e.g kub-dep-demo
+
+3. create a VPC for your cluster using AWS Cloudformation, (https://s3.us-west-2.amazonaws.com/amazon-eks/cloudformation/2020-10-29/amazon-eks-vpc-private-subnets.yaml),
+then link that to the EKS in AWS. leave all other settings default
+
+4. connect to AWS EKS (this changes the above file example):
+  aws eks --region us-east-1 update-kubeconfig --name {cluster name}
+
+The file will now change, (~/.kube/config.yaml)

@@ -1,0 +1,29 @@
+Pods have an internal IP by default -it changes when a pod is replaced
+
+Services group pods with a shared IP & can allows external access to Pods
+    - kubectl expose deployment first-app --type=LoadBalancer --port=8080
+        - --type=LoadBalancer: distributes traffic evenly amongst the pods (EKS / minkube)
+        - kubectl get services //can see IP and other info
+        - minikube service first-app //gives me IP fo access the POD
+
+Why Create Service First?
+Good practice is to create service first as it is continously is running after
+creation and monitoring which pods are made. As long as it matches the label 
+selector. 
+
+e.g.
+selector:
+    app: second-app
+
+As long as it matches that the service will keep monitoring the new pods created
+
+Why Service? :
+Allow for static IP address 
+Allows to connect from outside 
+
+Get Service IP? :
+kubectl apply -f=users-service.yaml
+minkube service users-service
+
+OR 
+of uploaded to cloud provider - you can get from there

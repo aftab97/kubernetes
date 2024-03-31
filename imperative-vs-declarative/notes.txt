@@ -1,0 +1,7 @@
+Imperative:
+ Individual commands are executed to trigger certain kubernetes actions
+ e.g. kubectl create deployment...
+
+Declarative:
+ A config file is defined and applied to change the desired state
+ kubectl apply -f config.yaml

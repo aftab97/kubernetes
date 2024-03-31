@@ -1,0 +1,11 @@
+By doing this:
+
+metadata:
+  name: second-app-deployment
+  # by doing this 
+  labels:
+    group: example
+
+you can now delete by specifying labels:
+kubectl delete deployments,services -l group=example
+

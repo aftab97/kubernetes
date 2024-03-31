@@ -1,0 +1,8 @@
+Ambassador container is a proxy for communicating to and from the primary conatiner.
+Commonly used for connecting to DB.
+
+
+ADV:
+Streamlined development experience
+Potential to reuse Ambassador across languages
+
